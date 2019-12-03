@@ -16,7 +16,7 @@ class CreateMKabupatenTable extends Migration
         Schema::create('m_kabupaten', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama_kabupaten');
-            $table->int('provinsi_id');
+            $table->integer('provinsi_id');
             $table->timestamps();
         });
     }

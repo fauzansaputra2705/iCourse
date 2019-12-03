@@ -19,10 +19,10 @@ class CreateMSekolahTable extends Migration
             $table->string('jenjang');
             $table->string('nama_sekolah');
             $table->text('alamat');
-            $table->int('kelurahan_id');
-            $table->int('kecamatan_id');
-            $table->int('kabupaten_id');
-            $table->int('provinsi_id');
+            $table->integer('kelurahan_id');
+            $table->integer('kecamatan_id');
+            $table->integer('kabupaten_id');
+            $table->integer('provinsi_id');
             $table->timestamps();
 
         });

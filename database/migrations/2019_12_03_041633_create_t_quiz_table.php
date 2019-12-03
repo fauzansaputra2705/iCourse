@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMQuizTable extends Migration
+class CreateTQuizTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMQuizTable extends Migration
      */
     public function up()
     {
-        Schema::create('m_quiz', function (Blueprint $table) {
+        Schema::create('t_quiz', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
         });

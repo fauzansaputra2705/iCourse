@@ -14,13 +14,14 @@ class CreateMSoalTable extends Migration
     public function up()
     {
         Schema::create('m_soal', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigIncrements('kategori_soal_id');
+            $table->integer('id');
+            $table->integer('kategori_soal_id');
             $table->text('konten_soal');
-            $table->string('jenis_soal'); 
+            $table->string('jenis_soal');
             $table->string('tag_materi');
+            $table->primary(array('id', 'kategori_soal_id'));
             $table->timestamps();
-            
+
         });
     }
 

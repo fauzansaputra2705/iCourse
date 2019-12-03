@@ -20,12 +20,12 @@ class CreateMSiswaTable extends Migration
             $table->enum('jenis_kelamin',['L','P']);
             $table->date('tanggal_ lahir');
             $table->text('alamat');
-            $table->int('kelurahan_id');
-            $table->int('kecamatan_id');
-            $table->int('kabupaten_id');
-            $table->int('provinsi_id');
-            $table->int('sekolah_id');
-            $table->int('user_id');
+            $table->integer('kelurahan_id');
+            $table->integer('kecamatan_id');
+            $table->integer('kabupaten_id');
+            $table->integer('provinsi_id');
+            $table->integer('sekolah_id');
+            $table->integer('user_id');
             $table->timestamps();
 
         });
