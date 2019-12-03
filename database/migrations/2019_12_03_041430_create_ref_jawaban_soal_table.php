@@ -17,7 +17,7 @@ class CreateRefJawabanSoalTable extends Migration
             $table->bigIncrements('id');
             $table->integer('soal_id');
             $table->string('jawaban');
-            $table->boolean('jawaban_benar');
+            $table->enum('jawaban_benar',[0,1]);
             $table->timestamps();
         });
     }
