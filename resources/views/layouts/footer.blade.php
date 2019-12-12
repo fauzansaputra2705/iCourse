@@ -10,7 +10,7 @@
 
                         <div class="row">
                             <div class="col-6 col-md"  style="background: url('{{asset('assets/images/world-map.png')}}') no-repeat center center; background-size: 100%;">
-                                <img class="mb-3" src="{{ asset('assets/demos/course/images/logo-footer.png') }}" alt="" width="160">
+                                <img class="mb-3" src="{{ asset('assets/logo-footer-iCourse.png') }}" alt="" width="160">
                                 <small class="d-block mb-4 text-muted">&copy; 2017-2018</small>
                                 <p class="text-white-50" style="font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, impedit quam nemo doloremque sed, dolores.</p>
                                 <a href="#" class="mb-2 d-block"><i class="icon-line2-call-in mr-2"></i>+91-111-222-333</a>
