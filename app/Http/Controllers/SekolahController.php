@@ -13,7 +13,10 @@ class SekolahController extends Controller
      */
     public function index()
     {
-        return view ('sekolah/index');
+        $data['title'] = "iCourse | SEKOLAH";
+        $data['pagenavbar'] = "sekolah.navbar";
+        $data['pagecontent'] = "sekolah.index";
+        return view ('layouts.app' , $data);
     }
 
     /**

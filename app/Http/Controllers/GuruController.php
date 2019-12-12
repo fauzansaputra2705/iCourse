@@ -13,7 +13,10 @@ class GuruController extends Controller
      */
     public function index()
     {
-        return view('guru/index');
+        $data['title'] = "iCourse | GURU";
+        $data['pagenavbar'] = "guru.navbar";
+        $data['pagecontent'] = "guru.index";
+        return view('layouts.app',$data);
     }
 
     /**

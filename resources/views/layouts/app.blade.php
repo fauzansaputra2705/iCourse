@@ -1,4 +1,19 @@
-<!doctype html>
+@if (!empty($pagenavbar))
+    @include($pagenavbar)
+@endif
+@if (!empty($pagecontent))
+    @include($pagecontent)
+@endif
+    @include('layouts.footer')
+
+
+
+
+
+
+
+
+{{-- <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -78,3 +93,20 @@
     </div>
 </body>
 </html>
+ --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

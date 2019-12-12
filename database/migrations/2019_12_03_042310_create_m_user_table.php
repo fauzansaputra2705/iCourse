@@ -19,7 +19,7 @@ class CreateMUserTable extends Migration
             $table->string('email')->unique();
             $table->string('no_akun');
             $table->string('password');
-            $table->enum('level', ['siswa','guru']);
+            $table->enum('level', ['siswa','guru','sekolah','admin']);
             $table->timestamps();
 
         });

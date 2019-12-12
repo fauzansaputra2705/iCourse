@@ -13,7 +13,10 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return view('siswa/index');
+        $data['title'] = "iCourse | SISWA";
+        $data['pagenavbar'] = "siswa.navbar";
+        $data['pagecontent'] = "siswa.index";
+        return view('layouts.app', $data);
     }
 
     /**

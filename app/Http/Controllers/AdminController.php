@@ -13,7 +13,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin/index');
+        $data['title'] = "iCourse | ADMIN";
+        $data['pagenavbar'] = "admin.navbar";
+        $data['pagecontent'] = "admin.index";
+        return view('layouts.app',$data);
     }
 
     /**

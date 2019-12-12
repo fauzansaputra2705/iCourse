@@ -16,16 +16,16 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role == 'siswa') {
+        if (Auth::check() && Auth::user()->level == 'siswa') {
             return redirect()->route('siswa');
         }
-        elseif (Auth::check() && Auth::user()->role == 'guru') {
+        elseif (Auth::check() && Auth::user()->level == 'guru') {
             return redirect()->route('guru');
         }
-        elseif (Auth::check() && Auth::user()->role == 'sekolah') {
+        elseif (Auth::check() && Auth::user()->level == 'sekolah') {
             return redirect()->route('sekolah');
         }
-        elseif (Auth::check() && Auth::user()->role == 'admin') {
+        elseif (Auth::check() && Auth::user()->level == 'admin') {
             return $next($request);
         }
         else {
