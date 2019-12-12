@@ -15,7 +15,7 @@ Route::get('/', function () {
 	$data['title'] = "iCourse | HOME";
 	$data['pagenavbar'] = "navbar";
 	$data['pagecontent'] = "welcome";
-    return view('layouts.app' , $data);
+	return view('layouts.app' , $data);
 });
 
 Auth::routes();
