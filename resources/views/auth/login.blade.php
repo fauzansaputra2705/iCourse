@@ -414,6 +414,9 @@
             </header><!-- #header end -->
 
 
+
+
+
         <!-- Page Title
             ============================================= -->
             <section id="page-title" style="margin-top: 1%;">
@@ -444,9 +447,10 @@
                             <div class="acc_content clearfix">
                                 <form id="login-form" name="login-form" class="nobottommargin" action="{{ route('login') }}" method="post">
                                     @csrf
+
                                     <div class="col_full">
                                         <label for="login-form-username">Email :</label>
-                                        <input type="email" id="email" class="form-control" @error('email') class="is-invalid" @enderror name="email" value="{{ old('email') }}" required autocomplete="email" autofocus />
+                                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus />
 
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -457,7 +461,7 @@
 
                                     <div class="col_full">
                                         <label for="login-form-password">Password :</label>
-                                        <input type="password" id="login-form-password" value="" class="form-control" @error('password') class="is-invalid" @enderror name="password" required autocomplete="current-password"/>
+                                        <input type="password" id="login-form-password" value="" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"/>
 
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
