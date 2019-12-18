@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}" type="text/css" />
 
+    <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
+
+    <link href="{{ asset('assets/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('assets/one-page/css/et-line.css') }}" type="text/css" />
 
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" type="text/css" />

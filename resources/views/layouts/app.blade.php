@@ -1,6 +1,4 @@
-@if (!empty($pagenavbar))
-    @include($pagenavbar)
-@endif
+    @include('layouts.header')
 @if (!empty($pagecontent))
     @include($pagecontent)
 @endif
