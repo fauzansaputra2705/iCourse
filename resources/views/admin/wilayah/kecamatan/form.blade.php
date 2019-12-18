@@ -15,21 +15,25 @@
 					<input type="hidden" id="id" name="id">
 
 					<label for="">Nama Provinsi</label>
-					<select name="" id="provinsi" class="form-control selectpicker" data-live-search="true" required>
+					<select name="" id="provinsi" class="form-control" required>
 						@foreach ($provinsi as $p)
-							<option value="{{$p->id}}" id="{{$p->nama_provinsi}}">{{$p->nama_provinsi}}</option>
+							<option value="{{ $p->id }}">{{ $p->nama_provinsi }}</option>
 						@endforeach
 					</select>
 
 					<label for="">Nama Kabupaten</label>
-					<select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
+					<select name="kabupaten_id" id="kabupaten" class="form-control" required>
 						@foreach ($kabupaten as $k)
-							<option value="{{$k->id}}" id="{{$k->nama_kabupaten}}">{{$k->nama_kabupaten}}</option>
+							@foreach ($provinsi as $p)
+								@if ($k->provinsi_id == $p->id)
+								<option value="{{ $k->provinsi_id }}">{{ $k->nama_kabupaten }}</option>
+								@endif
+							@endforeach
 						@endforeach
 					</select>
 
 					<label for="">Nama Kecamatan</label>
-					<input type="text" name="nama_kecamatan" id="nama_kecamatan" class="form-control" autofocus required>
+					<input type="text" name="nama_kecamatan" id="nama_kecamatan" class="form-control" required>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
