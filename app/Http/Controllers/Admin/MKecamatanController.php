@@ -9,6 +9,7 @@ use App\m_Provinsi;
 use App\m_Kabupaten;
 use DataTables;
 use Illuminate\Http\Request;
+use DB;
 
 class MKecamatanController extends Controller
 {
@@ -20,28 +21,29 @@ class MKecamatanController extends Controller
 
     public function json()
     {
-        $data = m_Kecamatan::all();
+        // $data = m_Kecamatan::all();
 
-        // $data = DB::table('m_provinsi')
-        //             ->join('m_kabupaten','m_provinsi.id', '=', 'm_kabupaten.provinsi_id')
-        //             ->select('m_provinsi.*', 'm_kabupaten.*')
-        //             ->get();
+        $data = DB::table('m_kabupaten')
+                    ->join('m_kecamatan','m_kabupaten.id', '=', 'm_kecamatan.kabupaten_id')
+                    ->join('m_provinsi','m_kabupaten.provinsi_id', '=', 'm_provinsi.id')
+                    ->select('m_kecamatan.*', 'm_kabupaten.nama_kabupaten', 'm_provinsi.nama_provinsi')
+                    ->get();
 
         return DataTables::of($data)
 
         ->addColumn('nama_provinsi', function($data){
-                // return $data->nama_provinsi;
+                return $data->nama_provinsi;
         })
 
         ->addColumn('nama_kabupaten', function($data){
-                // return $data->nama_provinsi;
+                return $data->nama_kabupaten;
         })
 
         ->addColumn('action', function($data){
             return  /*' <a href="#" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i>Show</a> '*/
-                     ' <a onclick="edit('. $data->id .')" 
-                     class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
-                    . '<a onclick="hapus('. $data->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> ';
+            ' <a onclick="edit('. $data->id .')" 
+            class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
+            . '<a onclick="hapus('. $data->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> ';
         })
         ->rawColumns(['nama_provinsi','nama_kabupaten','action'])
         ->make(true);
@@ -53,8 +55,15 @@ class MKecamatanController extends Controller
         $data['title'] = "iCourse | KECAMATAN";
         $data['pagecontent']= "admin.wilayah.kecamatan.index";
         $data['provinsi'] = m_Provinsi::all();
-        $data['kabupaten'] = m_Kabupaten::all();
         return view ('layouts.app',$data);
+    }
+
+    public function getKabupaten($id)
+    {
+         $kabupaten = DB::table("m_kabupaten")
+        ->where("provinsi_id", $id)
+        ->pluck("nama_kabupaten","id");
+        return response()->json($kabupaten);
     }
 
     /**

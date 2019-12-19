@@ -34,7 +34,7 @@
 
                         <!-- Top Links
                             ============================================= -->
-                            <div class="top-links">
+                            {{-- <div class="top-links">
                                 <ul>
                                     <li><a href="#">All Cities</a>
                                         <ul>
@@ -46,7 +46,7 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </div><!-- .top-links end -->
+                            </div> --}}<!-- .top-links end -->
 
                         </div>
 
@@ -54,12 +54,12 @@
 
                         <!-- Top Links
                             ============================================= -->
-                            <div class="top-links">
+                            {{-- <div class="top-links">
                                 <ul>
                                     <li><a href="#">Free Courses</a></li>
                                     <li class="d-none d-sm-inline-block"><a href="#"><i class="icon-download-alt"></i> Download App</a></li>
                                 </ul>
-                            </div><!-- .top-links end -->
+                            </div> --}}<!-- .top-links end -->
 
                             <div id="top-social">
                                 <ul>

@@ -27,7 +27,8 @@
 					</select>
 
 					<label for="">Nama Kecamatan</label>
-					<input type="text" name="nama_kecamatan" id="kecamatan" class="form-control" required>
+					<select name="kecamatan_id" id="kecamatan" class="form-control" required>
+					</select>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

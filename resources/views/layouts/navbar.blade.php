@@ -5,15 +5,19 @@
 <li class="nav-item">
     <a href="#" class="nav-link">Sekolah</a>
 </li>
-<li class="nav-item">
-    <a href="#" class="nav-link">Referensi</a>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Referensi
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Kategori Soal</a>
+    </div>
 </li>
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Soal
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Kategori Soal</a>
         <a class="dropdown-item" href="#">Bank Soal</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Buat Soal</a>
@@ -39,7 +43,7 @@
         <a class="dropdown-item" href="{{ url('admin/provinsi') }}">Provinsi</a>
         <a class="dropdown-item" href="{{ url('admin/kabupaten') }}">Kabupaten</a>
         <a class="dropdown-item" href="{{ url('admin/kecamatan') }}">Kecamatan</a>
-        <a class="dropdown-item" href="#">Kelurahan</a>
+        <a class="dropdown-item" href="{{ url('admin/kelurahan') }}">Kelurahan</a>
     </div>
 </li>
 <li class="nav-item dropdown">

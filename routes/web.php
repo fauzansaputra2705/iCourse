@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
 	//kecamatan
 	Route::get('/json/kecamatan', 'Admin\MKecamatanController@json')->name('json_kecamatan');
 	Route::resource('/kecamatan', 'Admin\MKecamatanController');
+	Route::get('/getKabupaten/{id}', 'Admin\MKecamatanController@getKabupaten');
 });
 Route::get('/siswa', 'Siswa\SiswaController@index')->name('siswa')->middleware('siswa');
 Route::get('/guru', 'Guru\GuruController@index')->name('guru')->middleware('guru');
