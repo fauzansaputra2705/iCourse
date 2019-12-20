@@ -29,7 +29,7 @@
     </div>
   </section>
   <!-- #content end -->
-  @include('admin.wilayah.kecamatan.form')
+  @include('admin.wilayah.kelurahan.form')
 
   @section('addscript')
   <script>    
@@ -59,7 +59,7 @@
       $('input[name=_method]').val('PATCH');
       $('#modal-form form')[0].reset();
       $.ajax({
-        url: "{{ url('admin/kecamatan') }}" + '/' + id + "/edit",
+        url: "{{ url('admin/kelurahan') }}" + '/' + id + "/edit",
         type: "GET",
         dataType: "JSON",
         success: function(data) {
@@ -67,7 +67,9 @@
           $('.modal-title').text('Edit Kelurahan');
 
           $('#id').val(data.id);
-          $('#provinsi_id option[value="'+data.provinsi_id+'"]').prop('selected',true);
+          $('#provinsi option[value="'+data.provinsi_id+'"]').prop('selected',true);
+          $('#kabupaten_id option[value="'+data.kabupaten_id+'"]').prop('selected',true);
+          $('#kecamatan_id option[value="'+data.kecamatan_id+'"]').prop('selected',true);
           $('#nama_kelurahan').val(data.nama_kelurahan);
         },
         error : function() {
@@ -88,7 +90,7 @@
         confirmButtonText: 'Ya, hapus!'
       }).then(function () {
         $.ajax({
-          url : "{{ url('admin/kecamatan') }}" + '/' + id,
+          url : "{{ url('admin/kelurahan') }}" + '/' + id,
           type : "POST",
           data : {'_method' : 'DELETE', '_token' : csrf_token},
           success : function(data) {
@@ -116,8 +118,8 @@
       $('#modal-form form').validator().on('submit', function (e) {
         if (!e.isDefaultPrevented()){
           var id = $('#id').val();
-          if (save_method == 'add') url = "{{ url('admin/kecamatan') }}";
-          else url = "{{ url('admin/kecamatan') . '/' }}" + id;
+          if (save_method == 'add') url = "{{ url('admin/kelurahan') }}";
+          else url = "{{ url('admin/kelurahan') . '/' }}" + id;
 
           $.ajax({
             url : url,
@@ -151,43 +153,71 @@
     });
 
 
-    $("#kabupaten").prop('disabled', true);
-    $("#kecamatan").prop('disabled', true);
+    $("#kabupaten_id").prop('disabled', true);
+    $("#kecamatan_id").prop('disabled', true);
+    $("#nama_kelurahan").prop('disabled', true);
+
 
     $('#provinsi').change(function(){
-    var id_provinsi = $(this).val();
-    if(id_provinsi){
+      var id_provinsi = $(this).val();
+      if(id_provinsi){
         $.ajax({
-           type:"GET",
-           url:"{{url('admin/getKabupaten')}}/"+id_provinsi,
-           success:function(res){               
-            if(res){
-                $("#kabupaten").empty();
-                $("#kabupaten").removeAttr('disabled');
-                $("#kabupaten").append('<option>Pilih Kabupaten</option>');
-                $.each(res,function(key,value){
-                    $("#kabupaten").append('<option value="'+key+'">'+value+'</option>');
-                });
-           
-            }else{
-               // $("#kabupaten").empty();
-               $("#kabupaten").prop('disabled', true);
-            }
-           }
-        });
-    }else{
-        // $("#kabupaten").empty();
-        $("#kabupaten").prop('disabled', true);
-        $("#kecamatan").prop('disabled', true);
-        // $("#city").empty();
-    }      
-   });
+         type:"GET",
+         url:"{{url('admin/getKabupaten')}}/"+id_provinsi,
+         success:function(res){               
+          if(res){
+            $("#kabupaten_id").empty();
+            $("#kabupaten_id").removeAttr('disabled');
+            $("#kabupaten_id").append('<option>Pilih Kabupaten</option>');
+            $.each(res,function(key,value){
+              $("#kabupaten_id").append('<option value="'+key+'">'+value+'</option>');
+            });
 
-   $('kabupaten').change(function() {
+          }else{
+               // $("kabupaten_id").empty();
+               $("#kabupaten_id").prop('disabled', true);
+             }
+           }
+         });
+      }else{
+        // $("kabupaten_id").empty();
+        $("#kabupaten_id").prop('disabled', true);
+        $("#nama_kecamatan").prop('disabled', true);
+        // $("#city").empty();
+      }      
+    });
+
+
+    $('#kabupaten_id').change(function() {
      var id_kabupaten = $(this).val();
      if(id_kabupaten){
-        $("#kecamatan").removeAttr('disabled');
-     }
-   });
- </script>
- @endsection
+      $.ajax({
+        type : "GET",
+        url : "{{ url('admin/getKecamatan') }}/"+id_kabupaten,
+        success : function(res) {
+          if(res){
+            $("#kecamatan_id").empty();
+            $("#kecamatan_id").removeAttr('disabled');
+            $("#kecamatan_id").append('<option>Pilih Kecamatan</option>');
+            $.each(res,function(key,value){
+              $("#kecamatan_id").append('<option value="'+key+'">'+value+'</option>');
+            });
+          }else{
+            $("#kecamatan_id").prop('disabled', true);
+          }
+        }
+      });
+    }else {
+      $("#kecamatan_id").prop('disabled', true);
+      $("#nama_kelurahan").prop('disabled', true);
+    }
+  });
+
+  $('#kecamatan_id').change(function() {
+    var id_kecamatan = $(this).val();
+    if(id_kecamatan){
+      $('#nama_kelurahan').removeAttr('disabled');
+    }
+  })
+</script>
+@endsection

@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
+
     Route::get('/', 'Admin\AdminController@index')->name('admin');
 	//provinsi
 	Route::get('/json/provinsi', 'Admin\MProvinsiController@json')->name('json_provinsi');
@@ -31,6 +32,19 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
 	Route::get('/json/kecamatan', 'Admin\MKecamatanController@json')->name('json_kecamatan');
 	Route::resource('/kecamatan', 'Admin\MKecamatanController');
 	Route::get('/getKabupaten/{id}', 'Admin\MKecamatanController@getKabupaten');
+	//kelurahan
+	Route::get('/json/kelurahan', 'Admin\MKelurahanController@json')->name('json_kelurahan');
+	Route::resource('/kelurahan', 'Admin\MKelurahanController');
+	Route::get('/getKabupaten/{id}', 'Admin\MKelurahanController@getKabupaten');
+	Route::get('/getKecamatan/{id}', 'Admin\MKelurahanController@getKecamatan');
+	//sekolah
+	Route::get('/json/sekolah', 'Admin\MSekolahController@json')->name('json_sekolah');
+	Route::resource('/sekolah', 'Admin\MSekolahController');
+	Route::get('/getKabupaten/{id}', 'Admin\MSekolahController@getKabupaten');
+	Route::get('/getKecamatan/{id}', 'Admin\MSekolahController@getKecamatan');
+	Route::get('/getKelurahan/{id}', 'Admin\MSekolahController@getKelurahan');
+
+
 });
 Route::get('/siswa', 'Siswa\SiswaController@index')->name('siswa')->middleware('siswa');
 Route::get('/guru', 'Guru\GuruController@index')->name('guru')->middleware('guru');

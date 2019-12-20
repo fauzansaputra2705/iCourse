@@ -21,14 +21,12 @@ class MKecamatanController extends Controller
 
     public function json()
     {
-        // $data = m_Kecamatan::all();
 
         $data = DB::table('m_kabupaten')
                     ->join('m_kecamatan','m_kabupaten.id', '=', 'm_kecamatan.kabupaten_id')
                     ->join('m_provinsi','m_kabupaten.provinsi_id', '=', 'm_provinsi.id')
-                    ->select('m_kecamatan.*', 'm_kabupaten.nama_kabupaten', 'm_provinsi.nama_provinsi')
+                    ->select('m_kecamatan.*', 'm_kabupaten.nama_kabupaten', 'm_kabupaten.provinsi_id', 'm_provinsi.nama_provinsi')
                     ->get();
-
         return DataTables::of($data)
 
         ->addColumn('nama_provinsi', function($data){

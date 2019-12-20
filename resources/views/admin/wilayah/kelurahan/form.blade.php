@@ -23,12 +23,15 @@
 					</select>
 
 					<label for="">Nama Kabupaten</label>
-					<select name="kabupaten_id" id="kabupaten" class="form-control" required>
+					<select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
 					</select>
 
 					<label for="">Nama Kecamatan</label>
-					<select name="kecamatan_id" id="kecamatan" class="form-control" required>
+					<select name="kecamatan_id" id="kecamatan_id" class="form-control" required>
 					</select>
+
+					<label for="">Nama Kelurahan</label>
+					<input type="text" name="nama_kelurahan" id="nama_kelurahan" class="form-control" required>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

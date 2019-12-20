@@ -66,7 +66,8 @@
 
           $('#id').val(data.id);
           $('#provinsi option[value="'+data.provinsi_id+'"]').prop('selected',true);
-          $('#kecamatan').val(data.nama_kecamatan);
+          $('#kabupaten_id option[value="'+data.kabupaten_id+'"]').prop('selected',true);
+          $('#nama_kecamatan').val(data.nama_kecamatan);
         },
         error : function() {
           alert("Nothing Data");
@@ -148,10 +149,9 @@
       });
     });
 
-    $(document).ready(function() {
-      $("#kecamatan").prop('disabled', true);
-      $("#kabupaten").prop('disabled', true);
-    });
+
+      $("#kabupaten_id").prop('disabled', true);
+      $("#nama_kecamatan").prop('disabled', true);
 
 
     $('#provinsi').change(function(){
@@ -162,31 +162,33 @@
            url:"{{url('admin/getKabupaten')}}/"+id_provinsi,
            success:function(res){               
             if(res){
-                $("#kabupaten").empty();
-                $("#kabupaten").removeAttr('disabled');
-                $("#kabupaten").append('<option>Pilih Kabupaten</option>');
+                $("#kabupaten_id").empty();
+                $("#kabupaten_id").removeAttr('disabled');
+                $("#kabupaten_id").append('<option>Pilih Kabupaten</option>');
                 $.each(res,function(key,value){
-                    $("#kabupaten").append('<option value="'+key+'">'+value+'</option>');
+                    $("#kabupaten_id").append('<option value="'+key+'">'+value+'</option>');
                 });
            
             }else{
-               // $("#kabupaten").empty();
-               $("#kabupaten").prop('disabled', true);
+               // $("kabupaten_id").empty();
+               $("#kabupaten_id").prop('disabled', true);
             }
            }
         });
     }else{
-        // $("#kabupaten").empty();
-        $("#kabupaten").prop('disabled', true);
-        $("#kecamatan").prop('disabled', true);
+        // $("kabupaten_id").empty();
+        $("#kabupaten_id").prop('disabled', true);
+        $("#nama_kecamatan").prop('disabled', true);
         // $("#city").empty();
     }      
    });
 
-   $('kabupaten').change(function() {
+   $('#kabupaten_id').change(function() {
      var id_kabupaten = $(this).val();
      if(id_kabupaten){
-        $("#kecamatan").removeAttr('disabled');
+        $("#nama_kecamatan").removeAttr('disabled');
+     }else {
+        $("#nama_kecamatan").prop('disabled', true);
      }
    });
  </script>

@@ -15,6 +15,7 @@
 					<input type="hidden" id="id" name="id">
 					<label for="">Nama Provinsi</label>
 					<select name="provinsi_id" id="provinsi_id" class="form-control" required>
+						<option> Pilih Provinsi </option>
 						@foreach ($provinsi as $p)
 							<option value="{{$p->id}}" id="{{$p->nama_provinsi}}">{{$p->nama_provinsi}}</option>
 						@endforeach

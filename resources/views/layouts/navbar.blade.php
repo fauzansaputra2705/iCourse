@@ -3,7 +3,7 @@
     <a class="nav-link" href="{{ url('admin') }}">Home</a>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link">Sekolah</a>
+    <a href="{{ url('admin/sekolah') }}" class="nav-link">Sekolah</a>
 </li>
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,6 +65,10 @@
     </form>
 </div>
 </li>
+
+
+
+
 @elseif(Auth::check() && Auth::user()->level == "siswa")
 <li class="nav-item active">
     <a class="nav-link" href="{{ url('siswa') }}">Home</a>
@@ -94,6 +98,9 @@
     </form>
 </div>
 </li>
+
+
+
 @elseif(Auth::check() && Auth::user()->level == "guru")
 <li class="nav-item active">
     <a class="nav-link" href="{{ url('guru') }}">Home</a>
@@ -134,6 +141,9 @@
     </form>
 </div>
 </li>
+
+
+
 @elseif(Auth::check() && Auth::user()->level == "sekolah")
 <li class="nav-item active">
     <a class="nav-link" href="{{ url('sekolah') }}">Home</a>
@@ -164,6 +174,9 @@
 </div>
 </li>
 @else
+
+
+
 <li class="nav-item active">
     <a class="nav-link" href="{{ url('/') }}">Home</a>
 </li>

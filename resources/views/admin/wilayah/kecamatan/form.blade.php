@@ -16,18 +16,18 @@
 
 					<label for="">Nama Provinsi</label>
 					<select name="id_provinsi" id="provinsi" class="form-control" required>
-						<option value="pilih_provinsi" selected>Pilih Provinsi </option>
+						<option>Pilih Provinsi </option>
 						@foreach ($provinsi as $key => $p)
 							<option value="{{ $p->id }}">{{ $p->nama_provinsi }}</option>
 						@endforeach
 					</select>
 
 					<label for="">Nama Kabupaten</label>
-					<select name="kabupaten_id" id="kabupaten" class="form-control" required>
+					<select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
 					</select>
 
 					<label for="">Nama Kecamatan</label>
-					<input type="text" name="nama_kecamatan" id="kecamatan" class="form-control" required>
+					<input type="text" name="nama_kecamatan" id="nama_kecamatan" class="form-control" required>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
