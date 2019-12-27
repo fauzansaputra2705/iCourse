@@ -12,10 +12,13 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<label for="">Nama Provinsi</label>
-
 					<input type="hidden" id="id" name="id">
-					<input type="text" name="nama_provinsi" id="nama_provinsi" class="form-control" autofocus required>
+					
+					<div class="form-group">
+						<label for="">Nama Provinsi</label>
+						<input type="text" name="nama_provinsi" id="nama_provinsi" class="form-control" autofocus required>
+					</div>
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

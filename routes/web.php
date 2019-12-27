@@ -21,7 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
 
-    Route::get('/', 'Admin\AdminController@index')->name('admin');
+	Route::get('/', 'Admin\AdminController@index')->name('admin');
 	//provinsi
 	Route::get('/json/provinsi', 'Admin\MProvinsiController@json')->name('json_provinsi');
 	Route::resource('/provinsi', 'Admin\MProvinsiController');
@@ -43,6 +43,14 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
 	Route::get('/getKabupaten/{id}', 'Admin\MSekolahController@getKabupaten');
 	Route::get('/getKecamatan/{id}', 'Admin\MSekolahController@getKecamatan');
 	Route::get('/getKelurahan/{id}', 'Admin\MSekolahController@getKelurahan');
+	//kategori_soal
+	Route::resource('/kategori_soal', 'Admin\MKategoriSoalController');
+	Route::get('/json/kategori_soal', 'Admin\MKategoriSoalController@json')->name('json_kategorisoal');
+	//soal
+	Route::get('/json/soal', 'MSoalController@json')->name('json_soal');
+	Route::resource('/soal', 'MSoalController');
+	Route::get('/soal/buat_soal/{id}', 'MSoalController@buat_soal')->name('buat_soal');
+	Route::patch('/soal/create_soal/{id}', 'MSoalController@create_soal');
 
 
 });

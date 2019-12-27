@@ -30,25 +30,11 @@ class MSekolahController extends Controller
         ->select('m_sekolah.*','m_kelurahan.nama_kelurahan', 'm_kecamatan.nama_kecamatan' ,'m_kabupaten.nama_kabupaten', 'm_provinsi.nama_provinsi')
         ->get();
         return DataTables::of($data)
-        ->addColumn('nama_provinsi', function($data){
-            return $data->nama_provinsi;
-        })
-        ->addColumn('nama_kabupaten', function($data){
-            return $data->nama_kabupaten;
-        })
-        ->addColumn('nama_kecamatan', function($data)
-        {
-            return $data->nama_kecamatan;
-        })
-        ->addColumn('nama_kelurahan', function($data)
-        {
-            return $data->nama_kelurahan;
-        })
 
         ->addColumn('action', function($data){
             return  /*' <a href="#" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i>Show</a> '*/
             ' <a href="'. url("admin/sekolah/$data->id/edit") .'" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
-            . '<a href="'. url("admin/sekolah/$data->id") .'" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> ';
+            . '<a onclick="hapus('.$data->id.')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> ';
         })
         ->rawColumns(['nama_provinsi','nama_kabupaten','nama_kecamatan','nama_kelurahan','action'])
         ->make(true);
@@ -110,7 +96,7 @@ class MSekolahController extends Controller
     public function store(Request $request)
     {
         m_Sekolah::create($request->all());
-
+        
         return redirect('admin/sekolah');
     }
 
@@ -120,10 +106,10 @@ class MSekolahController extends Controller
      * @param  \App\m_Sekolah  $m_Sekolah
      * @return \Illuminate\Http\Response
      */
-    // public function show(m_Sekolah $m_Sekolah)
-    // {
-    //     //
-    // }
+    public function show($id)
+    {
+        
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -136,6 +122,7 @@ class MSekolahController extends Controller
         $data['title'] = "iCourse | EDIT SEKOLAH";
         $data['pagecontent'] = "admin.sekolah.form";
         $data['sekolah'] = m_Sekolah::find($id);
+        $data['provinsi'] = m_Provinsi::all();
 
         return view('layouts.app',$data);
     }
@@ -161,14 +148,7 @@ class MSekolahController extends Controller
      * @param  \App\m_Sekolah  $m_Sekolah
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($id)
-    // {
-    //     m_Sekolah::destroy($id);
-
-    //     return redirect('admin/sekolah');
-    // }
-
-    public function show($id)
+    public function destroy($id)
     {
         m_Sekolah::destroy($id);
 

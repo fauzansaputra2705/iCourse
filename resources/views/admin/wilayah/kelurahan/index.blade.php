@@ -3,6 +3,10 @@
 	<section id="content" style="overflow: visible;">
 
 		<div class="content-wrap">
+      <div class="container">
+        <h1>Data Kelurahan</h1>
+        <hr color="black" style="height: 2px;">
+      </div>
 
       <div class="container">
         <a onclick="add()" class="btn btn-primary text-white mb-3"><i class="fas fa-plus text-white"></i> Tambah </a>
@@ -152,10 +156,32 @@
       });
     });
 
+    $("#provinsi").select2({
+      'width' : '100%',
+      theme : 'bootstrap4',
+    });
+
+    $("#kabupaten_id").select2({
+      'width' : '100%',
+      theme : 'bootstrap4',
+    });
+
+    $("#kecamatan_id").select2({
+      'width' : '100%',
+      theme : 'bootstrap4',
+    });
+
+
+    $("#provinsi").append('<option selected> Pilih Provinsi</option>');
 
     $("#kabupaten_id").prop('disabled', true);
+    $("#kabupaten_id").append('<option selected> Pilih Provinsi Dahulu</option>');
+
     $("#kecamatan_id").prop('disabled', true);
+    $("#kecamatan_id").append('<option selected> Pilih Kabupaten Dahulu</option>');
+
     $("#nama_kelurahan").prop('disabled', true);
+    $('#nama_kelurahan').prop('placeholder', 'Pilih Kecamatan Dahulu');
 
 
     $('#provinsi').change(function(){
@@ -213,11 +239,11 @@
     }
   });
 
-  $('#kecamatan_id').change(function() {
-    var id_kecamatan = $(this).val();
-    if(id_kecamatan){
-      $('#nama_kelurahan').removeAttr('disabled');
-    }
-  })
-</script>
-@endsection
+    $('#kecamatan_id').change(function() {
+      var id_kecamatan = $(this).val();
+      if(id_kecamatan){
+        $('#nama_kelurahan').removeAttr('disabled');
+      }
+    })
+  </script>
+  @endsection

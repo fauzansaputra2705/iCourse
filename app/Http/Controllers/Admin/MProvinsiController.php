@@ -23,8 +23,8 @@ class MProvinsiController extends Controller
         return DataTables::of($provinsi)
         ->addColumn('action', function($provinsi){
             return  /*' <a href="#" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i>Show</a> '*/
-                     ' <a onclick="edit('. $provinsi->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
-                    . '<a onclick="hapus('. $provinsi->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> ';
+            ' <a onclick="edit('. $provinsi->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
+            . '<a onclick="hapus('. $provinsi->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> ';
         })
         ->rawColumns(['action'])
         ->make(true);

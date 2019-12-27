@@ -31,16 +31,6 @@ class MKelurahanController extends Controller
         ->select('m_kelurahan.*', 'm_kecamatan.nama_kecamatan' ,'m_kabupaten.nama_kabupaten', 'm_provinsi.nama_provinsi')
         ->get();
         return DataTables::of($data)
-        ->addColumn('nama_provinsi', function($data){
-            return $data->nama_provinsi;
-        })
-        ->addColumn('nama_kabupaten', function($data){
-            return $data->nama_kabupaten;
-        })
-        ->addColumn('nama_kecamatan', function($data)
-        {
-            return $data->nama_kecamatan;
-        })
 
         ->addColumn('action', function($data){
             return  /*' <a href="#" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i>Show</a> '*/

@@ -29,21 +29,13 @@ class MKecamatanController extends Controller
                     ->get();
         return DataTables::of($data)
 
-        ->addColumn('nama_provinsi', function($data){
-                return $data->nama_provinsi;
-        })
-
-        ->addColumn('nama_kabupaten', function($data){
-                return $data->nama_kabupaten;
-        })
-
         ->addColumn('action', function($data){
             return  /*' <a href="#" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i>Show</a> '*/
             ' <a onclick="edit('. $data->id .')" 
             class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
             . '<a onclick="hapus('. $data->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> ';
         })
-        ->rawColumns(['nama_provinsi','nama_kabupaten','action'])
+        ->rawColumns(['action'])
         ->make(true);
     }
 

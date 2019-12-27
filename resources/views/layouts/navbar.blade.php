@@ -1,29 +1,33 @@
 @if (Auth::check() && Auth::user()->level == "admin")
 <li class="nav-item active">
-    <a class="nav-link" href="{{ url('admin') }}">Home</a>
+    <a class="nav-link" href="{{ route('admin') }}">Home</a>
 </li>
 <li class="nav-item">
-    <a href="{{ url('admin/sekolah') }}" class="nav-link">Sekolah</a>
+    <a href="{{ route('sekolah.index') }}" class="nav-link">Sekolah</a>
 </li>
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Referensi
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Kategori Soal</a>
+        <a class="dropdown-item" href="{{ route('kategori_soal.index') }}">Kategori Soal</a>
     </div>
 </li>
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<li class="nav-item">
+    <a href="" class="nav-link">Bank Soal</a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('soal.index') }}" class="nav-link">Soal</a>
+</li>
+{{-- <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Soal
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Bank Soal</a>
-        <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">Buat Soal</a>
         <a class="dropdown-item" href="#">View Soal</a>
     </div>
-</li>
+</li> --}}
 <li class="nav-item">
     <a href="#" class="nav-link">Materi</a>
 </li>
@@ -32,7 +36,7 @@
         Quiz
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Kategori Quiz</a>
+        <a class="dropdown-item" href="">Kategori Quiz</a>
     </div>
 </li>
 <li class="nav-item dropdown">

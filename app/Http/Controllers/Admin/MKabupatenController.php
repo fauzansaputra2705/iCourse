@@ -23,23 +23,19 @@ class MKabupatenController extends Controller
         // $data['kabupaten'] = m_Kabupaten::all();
 
         $data = DB::table('m_provinsi')
-                    ->join('m_kabupaten','m_provinsi.id', '=', 'm_kabupaten.provinsi_id')
-                    ->select('m_provinsi.*', 'm_kabupaten.*')
-                    ->get();
+        ->join('m_kabupaten','m_provinsi.id', '=', 'm_kabupaten.provinsi_id')
+        ->select('m_provinsi.nama_provinsi', 'm_kabupaten.*')
+        ->get();
 
         return DataTables::of($data)
 
-        ->addColumn('nama_provinsi', function($data){
-                return $data->nama_provinsi;
-        })
-
         ->addColumn('action', function($data){
             return  /*' <a href="#" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-eye-open"></i>Show</a> '*/
-                     ' <a onclick="edit('. $data->id .')" 
-                     class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
-                    . '<a onclick="hapus('. $data->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> ';
+            ' <a onclick="edit('. $data->id .')" 
+            class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
+            . '<a onclick="hapus('. $data->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> ';
         })
-        ->rawColumns(['nama_provinsi','action'])
+        ->rawColumns(['action'])
         ->make(true);
     }
 

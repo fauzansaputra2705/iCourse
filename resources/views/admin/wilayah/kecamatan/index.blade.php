@@ -3,6 +3,10 @@
 	<section id="content" style="overflow: visible;">
 
 		<div class="content-wrap">
+      <div class="container">
+        <h1>Data Kecamatan</h1>
+        <hr color="black" style="height: 2px;">
+      </div>
 
       <div class="container">
         <a onclick="add()" class="btn btn-primary text-white mb-3"><i class="fas fa-plus text-white"></i> Tambah </a>
@@ -65,9 +69,14 @@
           $('.modal-title').text('Edit Kecamatan');
 
           $('#id').val(data.id);
+          if ($('#id').val(data.id)) {
+            $("#kabupaten_id").removeAttr('disabled');
+            $("#nama_kecamatan").removeAttr('disabled');
+          }
           $('#provinsi option[value="'+data.provinsi_id+'"]').prop('selected',true);
           $('#kabupaten_id option[value="'+data.kabupaten_id+'"]').prop('selected',true);
           $('#nama_kecamatan').val(data.nama_kecamatan);
+          
         },
         error : function() {
           alert("Nothing Data");
@@ -149,47 +158,59 @@
       });
     });
 
+    $("#provinsi").append('<option selected> Pilih Provinsi</option>');
 
-      $("#kabupaten_id").prop('disabled', true);
-      $("#nama_kecamatan").prop('disabled', true);
+    $("#kabupaten_id").prop('disabled', true);
+    $("#kabupaten_id").append('<option selected> Pilih Provinsi Dahulu</option>');
+
+    $("#nama_kecamatan").prop('disabled', true);
+    $("#nama_kecamatan").prop('placeholder', 'Pilih Kabupaten Dahulu');
+
+
+    $("#provinsi").select2({
+      'width' : '100%',
+      theme : 'bootstrap4',
+    });
+
+    $("#kabupaten_id").select2({
+      'width' : '100%',
+      theme : 'bootstrap4',
+    });
 
 
     $('#provinsi').change(function(){
-    var id_provinsi = $(this).val();
-    if(id_provinsi){
+      var id_provinsi = $(this).val();
+      if(id_provinsi){
         $.ajax({
-           type:"GET",
-           url:"{{url('admin/getKabupaten')}}/"+id_provinsi,
-           success:function(res){               
-            if(res){
-                $("#kabupaten_id").empty();
-                $("#kabupaten_id").removeAttr('disabled');
-                $("#kabupaten_id").append('<option>Pilih Kabupaten</option>');
-                $.each(res,function(key,value){
-                    $("#kabupaten_id").append('<option value="'+key+'">'+value+'</option>');
-                });
-           
-            }else{
-               // $("kabupaten_id").empty();
-               $("#kabupaten_id").prop('disabled', true);
-            }
-           }
-        });
-    }else{
-        // $("kabupaten_id").empty();
+         type:"GET",
+         url:"{{url('admin/getKabupaten')}}/"+id_provinsi,
+         success:function(res){               
+          if(res){
+            $("#kabupaten_id").empty();
+            $("#kabupaten_id").removeAttr('disabled');
+            $("#kabupaten_id").append('<option>Pilih Kabupaten</option>');
+            $.each(res,function(key,value){
+              $("#kabupaten_id").append('<option value="'+key+'">'+value+'</option>');
+            });
+
+          }else{
+           $("#kabupaten_id").prop('disabled', true);
+         }
+       }
+     });
+      }else{
         $("#kabupaten_id").prop('disabled', true);
         $("#nama_kecamatan").prop('disabled', true);
-        // $("#city").empty();
-    }      
-   });
+      }      
+    });
 
-   $('#kabupaten_id').change(function() {
+    $('#kabupaten_id').change(function() {
      var id_kabupaten = $(this).val();
      if(id_kabupaten){
-        $("#nama_kecamatan").removeAttr('disabled');
-     }else {
-        $("#nama_kecamatan").prop('disabled', true);
-     }
-   });
- </script>
- @endsection
+      $("#nama_kecamatan").removeAttr('disabled');
+    }else {
+      $("#nama_kecamatan").prop('disabled', true);
+    }
+  });
+</script>
+@endsection
