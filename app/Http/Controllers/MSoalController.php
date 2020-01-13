@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\m_Soal;
 use App\m_Kategori_Soal;
+use App\ref_konten_soal;
+use Session;
 use DataTables;
 use DB;
 use Illuminate\Http\Request;
@@ -26,15 +28,28 @@ class MSoalController extends Controller
 
         return DataTables::of($soal)
 
-        ->addColumn('action', function($soal){
-            return  
-            ' <a onclick="edit('. $soal->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
-            . '<a onclick="hapus('. $soal->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> '
-            . '<a href="'. url('admin/soal/buat_soal/'.$soal->id.'') .'" class="btn btn-primary btn-xs text-white">Buat Soal</a> '
-            . '<a href="'. url('admin/soal/edit_soal/'.$soal->id.'') .'" class="btn btn-primary btn-xs text-white">Edit Soal</a> '
-            . '<a href="'. url('admin/soal/view_soal/'. $soal->id .'') .'" class="btn btn-success btn-xs text-white">View Soal</a> ';
+        ->addColumn('jumlahsoal', function($soal){
+            $jumlahsoal = ref_konten_soal::where('soal_id', $soal->id)->count();
+                return $jumlahsoal;
         })
-        ->rawColumns(['action'])
+
+        ->addColumn('action', function($soal){
+            // if ($soal->konten_soal == NULL) {
+                return  
+                ' <a onclick="edit('. $soal->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
+                .' <a onclick="hapus('. $soal->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> '
+                .' <a href="'. url('admin/soal/konten_soal/'.$soal->id.'') .'" class="btn btn-primary btn-xs text-white">Buat Soal</a> '
+                .' <a href="'. url('admin/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-white">View Soal</a> ';
+        //     // }else {
+        //         // return
+        //         // ' <a onclick="edit('. $soal->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
+        //         // .' <a onclick="hapus('. $soal->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> '
+        //         // .' <a href="'. url('admin/soal/buat_soal/'.$soal->id.'') .'" class="btn btn-info btn-xs text-white">Edit Soal</a> '
+        //         // .' <a href="'. url('admin/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-black">View Soal</a> ';
+
+        //     // };
+        })
+        ->rawColumns(['action','jumlahsoal'])
         ->make(true);
     }
 
@@ -69,10 +84,11 @@ class MSoalController extends Controller
     {
         $input = [
             'kategori_soal_id' => $request->kategori_soal_id,
-            'konten_soal' => NULL,
             'jenis_soal' => $request->jenis_soal,
             'tag_materi' => $request->tag_materi,
+            // 'jumlah_soal' => 0,
         ];
+
         m_Soal::create($input);
 
         return response()->json([
@@ -86,9 +102,14 @@ class MSoalController extends Controller
      * @param  \App\m_Soal  $m_Soal
      * @return \Illuminate\Http\Response
      */
-    public function show(m_Soal $m_Soal)
+    public function show($id)
     {
-        //
+        $data['soal'] = m_Soal::find($id);
+        $data['konten_soal'] = ref_konten_soal::where('soal_id',$id)->get();
+        // $data['jawaban'] = ref_jawaban_soal::find($id);
+        $data['title'] = 'iCourse | VIEW SOAL';
+        $data['pagecontent'] = 'admin.soal.view_soal';
+        return view ('layouts.app', $data);
     }
 
     /**
@@ -100,7 +121,8 @@ class MSoalController extends Controller
     public function edit($id)
     {
         $soal = m_Soal::find($id);
-        return $soal;
+        $jumlahsoal = ref_konten_soal::where('soal_id', $id)->count();
+        return ['soal' => $soal, 'jumlahsoal' => $jumlahsoal];
     }
 
     /**
@@ -114,10 +136,10 @@ class MSoalController extends Controller
     {
         $soal = m_Soal::find($id);
         $input = [
-            'kategori_soal_id' => $request->kategori_soal,
-            'konten_soal' => NULL,
+            'kategori_soal_id' => $request->kategori_soal_id,
             'jenis_soal' => $request->jenis_soal,
             'tag_materi' => $request->tag_materi,
+            // 'jumlah_soal' => $request->jumlah_soal,
         ];
         $soal->update($input);
 
@@ -139,24 +161,5 @@ class MSoalController extends Controller
         return response()->json([
             'success' => true
         ]);
-    }
-
-    public function buat_soal($id)
-    {
-        $data['title'] = "iCourse | BUAT SOAL";
-        $data['soal'] = m_Soal::find($id);
-        $data['pagecontent'] = "admin.soal.buat_soal";
-        return view('layouts.app',$data);
-    }
-
-    public function create_soal(Request $request, $id)
-    {
-        $soal = m_Soal::find($id);
-
-        $soal->update([
-            'konten_soal' => $request->konten_soal,
-        ]);
-
-        return redirect('admin/soal');
     }
 }

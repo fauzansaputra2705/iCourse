@@ -86,8 +86,8 @@
 
                     <nav class="navbar navbar-expand-lg p-0 m-0">
                         <div id="logo">
-                            <a href="{{ url(auth()->user()->level) }}" class="standard-logo"><img src="{{asset('assets/logo-iCourse.png')}}" alt="Canvas Logo"></a>
-                            <a href="{{ url(auth()->user()->level) }}" class="retina-logo"><img src="{{ asset('assets/demos/course/images/logo@2x.png') }}" alt="Canvas Logo"></a>
+                            <a href="" class="standard-logo"><img src="{{asset('assets/logo-iCourse.png')}}" alt="Canvas Logo"></a>
+                            <a href="" class="retina-logo"><img src="{{ asset('assets/demos/course/images/logo@2x.png') }}" alt="Canvas Logo"></a>
                         </div>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="icon-line-menu"></span>

@@ -16,9 +16,9 @@
             <tr>
               <th>ID</th>
               <th>Kategori Soal</th>
-              {{-- <th>Konten Soal</th> --}}
               <th>Jenis Soal</th>
               <th>TAG Materi</th>
+              <th>Jumlah Soal</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -44,9 +44,10 @@
       columns: [
       { data: 'id', name: 'id' },
       { data: 'kategori_soal', name: 'kategori_soal' },
-      // { data: 'konten_soal', name: 'konten_soal' },
       { data: 'jenis_soal', name: 'jenis_soal' },
       { data: 'tag_materi', name: 'tag_materi' },
+      // { data: 'jumlah_soal', name: 'jumlah_soal' },
+      { data: 'jumlahsoal', name: 'jumlahsoal' },
       { data: 'action', name: 'action', orderable: false, searchable: false }
       ]
     });
@@ -70,11 +71,12 @@
           $('#modal-form').modal('show');
           $('.modal-title').text('Edit Soal');
 
-          $('#id').val(data.id);
-          $('#kategori_soal_id option[value="'+data.kategori_soal_id+'"]').prop('selected', true);
+          $('#id').val(data.soal.id);
+          $('#kategori_soal_id option[value="'+data.soal.kategori_soal_id+'"]').prop('selected', true);
           // $('#konten_soal').val(data.konten_soal);
-          $('#jenis_soal option[value="'+data.jenis_soal+'"').prop('selected', true);
-          $('#tag_materi').val(data.tag_materi);
+          $('#jenis_soal option[value="'+data.soal.jenis_soal+'"').prop('selected', true);
+          $('#tag_materi').val(data.soal.tag_materi);
+          $('#jumlah_soal').val(data.jumlahsoal);
         },
         error : function() {
           alert("Nothing Data");

@@ -16,9 +16,9 @@ class CreateMSoalTable extends Migration
         Schema::create('m_soal', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('kategori_soal_id');
-            $table->text('konten_soal')->nullable();
             $table->string('jenis_soal');
             $table->string('tag_materi');
+            // $table->integer('jumlah_soal');
             $table->timestamps();
 
         });

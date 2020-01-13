@@ -19,8 +19,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
 
+//admin
+Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
 	Route::get('/', 'Admin\AdminController@index')->name('admin');
 	//provinsi
 	Route::get('/json/provinsi', 'Admin\MProvinsiController@json')->name('json_provinsi');
@@ -49,10 +50,18 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
 	//soal
 	Route::get('/json/soal', 'MSoalController@json')->name('json_soal');
 	Route::resource('/soal', 'MSoalController');
-	Route::get('/soal/buat_soal/{id}', 'MSoalController@buat_soal')->name('buat_soal');
-	Route::patch('/soal/create_soal/{id}', 'MSoalController@create_soal');
-
-
+	Route::resource('/soal/jawaban_soal', 'RefJawabanSoalController');
+	//konten soal
+	Route::get('/json/kontensoal/{soal_id}', 'RefKontenSoalController@json');
+	Route::get('/soal/konten_soal/{id}', "RefKontenSoalController@index" );
+	Route::get('/soal/konten_soal/{id}/create', 'RefKontenSoalController@create');
+	Route::post('/soal/konten_soal/', 'RefKontenSoalController@store');
+	Route::get('/soal/konten_soal/{soal_id}/{id}/edit', 'RefKontenSoalController@edit');
+	Route::patch('/soal/konten_soal/{soal_id}/{id}', 'RefKontenSoalController@update');
+	Route::delete('/soal/konten_soal/{id}', 'RefKontenSoalController@destroy');
+	//jawaban soal
+	Route::post('/soal/jawaban_soal/', 'RefJawabanSoalController@store');
+	Route::patch('/soal/jawaban_soal/{id}', 'RefJawabanSoalController@create_soal');
 });
 Route::get('/siswa', 'Siswa\SiswaController@index')->name('siswa')->middleware('siswa');
 Route::get('/guru', 'Guru\GuruController@index')->name('guru')->middleware('guru');

@@ -10,6 +10,6 @@ class m_Soal extends Model
 
     protected $fillable =
     [
-    	"id", "kategori_soal_id", "konten_soal", "jenis_soal", "tag_materi",
+    	"id", "kategori_soal_id", "jenis_soal", "tag_materi", "jumlah_soal",
     ];
 }

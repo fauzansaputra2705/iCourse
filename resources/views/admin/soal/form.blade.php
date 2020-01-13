@@ -3,7 +3,7 @@
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
-			<form method="POST">
+			<form method="POST" >
 				{{ csrf_field() }} {{ method_field('POST') }}
 				<div class="modal-header">
 					<h5 class="modal-title" id="modal-title"></h5>
@@ -37,6 +37,11 @@
 						<label for="">TAG Materi</label>
 						<input type="text" name="tag_materi" id="tag_materi" value="" placeholder="" class="form-control">
 					</div>
+
+					{{-- <div class="form-group">
+						<label for="">Jumlah Soal</label>
+						<input type="number" readonly name="jumlah_soal" id="jumlah_soal" value="" placeholder="" class="form-control">
+					</div> --}}
 
 				</div>
 				<div class="modal-footer">
