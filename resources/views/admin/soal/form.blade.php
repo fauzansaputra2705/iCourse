@@ -31,6 +31,7 @@
 							<option value="Pilihan Ganda"> Pilihan Ganda</option>
 							<option value="Essay">Essay</option>
 						</select>
+						{{-- <input type="hidden" name="jenis_soal" value="" id="jenissoal"> --}}
 					</div>
 
 					<div class="form-group">

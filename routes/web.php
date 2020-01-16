@@ -50,7 +50,8 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
 	//soal
 	Route::get('/json/soal', 'MSoalController@json')->name('json_soal');
 	Route::resource('/soal', 'MSoalController');
-	Route::resource('/soal/jawaban_soal', 'RefJawabanSoalController');
+	// Route::delete('/soal/konten_soal/{id}', 'MSoalController@destroykonten_soal');
+	// Route::delete('/soal/jawaban_soal/{id}', 'MSoalController@destroyjawaban');
 	//konten soal
 	Route::get('/json/kontensoal/{soal_id}', 'RefKontenSoalController@json');
 	Route::get('/soal/konten_soal/{id}', "RefKontenSoalController@index" );
@@ -59,9 +60,8 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
 	Route::get('/soal/konten_soal/{soal_id}/{id}/edit', 'RefKontenSoalController@edit');
 	Route::patch('/soal/konten_soal/{soal_id}/{id}', 'RefKontenSoalController@update');
 	Route::delete('/soal/konten_soal/{id}', 'RefKontenSoalController@destroy');
-	//jawaban soal
-	Route::post('/soal/jawaban_soal/', 'RefJawabanSoalController@store');
-	Route::patch('/soal/jawaban_soal/{id}', 'RefJawabanSoalController@create_soal');
+	Route::delete('/soal/jawaban_soal/{id}', 'RefKontenSoalController@destroyjawaban');
+	Route::post('soal/upload', 'RefKontenSoalController@upload')->name('ckeditor.upload');
 });
 Route::get('/siswa', 'Siswa\SiswaController@index')->name('siswa')->middleware('siswa');
 Route::get('/guru', 'Guru\GuruController@index')->name('guru')->middleware('guru');

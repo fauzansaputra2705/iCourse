@@ -14,7 +14,6 @@
         "laravel/helpers": "^1.1",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.1",
-        "unisharp/laravel-filemanager": "~1.8",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

@@ -23,7 +23,7 @@
          <input type="hidden" name="soal_id" value="{{ $soal->id }}">
 
          <div class="form-group">
-           <textarea name="konten_soal" id="konten_soal" cols="30" rows="10"></textarea>
+           <textarea name="konten_soal" cols="30" rows="10"></textarea>
          </div>
 
 
@@ -104,17 +104,11 @@
 
 @section('addscript')
 <script>
-  var CSRFToken = $('meta[name="csrf-token"]').attr('content');
-  var options = {
-    filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-    filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token='+CSRFToken,
-    filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-    filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='+CSRFToken,
-    language : 'en',
-    removePlugins : 'save,maximize'
-  };
 
-  CKEDITOR.replace('konten_soal', options);
+  CKEDITOR.replace('konten_soal', {
+        filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
+    });
 
 
   $('#jawaban_benara').on('change', function() {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\m_Soal;
 use App\m_Kategori_Soal;
 use App\ref_konten_soal;
+use App\ref_jawaban_soal;
 use Session;
 use DataTables;
 use DB;
@@ -30,24 +31,15 @@ class MSoalController extends Controller
 
         ->addColumn('jumlahsoal', function($soal){
             $jumlahsoal = ref_konten_soal::where('soal_id', $soal->id)->count();
-                return $jumlahsoal;
+            return $jumlahsoal;
         })
 
         ->addColumn('action', function($soal){
-            // if ($soal->konten_soal == NULL) {
-                return  
-                ' <a onclick="edit('. $soal->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
-                .' <a onclick="hapus('. $soal->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> '
-                .' <a href="'. url('admin/soal/konten_soal/'.$soal->id.'') .'" class="btn btn-primary btn-xs text-white">Buat Soal</a> '
-                .' <a href="'. url('admin/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-white">View Soal</a> ';
-        //     // }else {
-        //         // return
-        //         // ' <a onclick="edit('. $soal->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
-        //         // .' <a onclick="hapus('. $soal->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> '
-        //         // .' <a href="'. url('admin/soal/buat_soal/'.$soal->id.'') .'" class="btn btn-info btn-xs text-white">Edit Soal</a> '
-        //         // .' <a href="'. url('admin/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-black">View Soal</a> ';
-
-        //     // };
+            return  
+            ' <a onclick="edit('. $soal->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
+            .' <a onclick="hapus('. $soal->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> '
+            .' <a href="'. url('admin/soal/konten_soal/'.$soal->id.'') .'" class="btn btn-primary btn-xs text-white">Buat/Edit Soal</a> '
+            .' <a href="'. url('admin/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-white">View Soal</a> ';
         })
         ->rawColumns(['action','jumlahsoal'])
         ->make(true);
@@ -106,7 +98,8 @@ class MSoalController extends Controller
     {
         $data['soal'] = m_Soal::find($id);
         $data['konten_soal'] = ref_konten_soal::where('soal_id',$id)->get();
-        // $data['jawaban'] = ref_jawaban_soal::find($id);
+        $data['jawaban'] = ref_jawaban_soal::where('soal_id',$id)->get();
+        // $data['jawab'] = explode('{{-- Batas JAWABAN --}}', $jb->jawaban);
         $data['title'] = 'iCourse | VIEW SOAL';
         $data['pagecontent'] = 'admin.soal.view_soal';
         return view ('layouts.app', $data);
@@ -157,6 +150,8 @@ class MSoalController extends Controller
     public function destroy($id)
     {
         m_Soal::destroy($id);
+        ref_konten_soal::where('soal_id',$id)->delete();
+        ref_jawaban_soal::where('soal_id',$id)->delete();
 
         return response()->json([
             'success' => true

@@ -15,11 +15,21 @@
 
         <table id="kontensoal" class="table table-striped table-bordered" style="width:100%">
           <thead>
-            <tr>
-              <th>NO Soal</th>
-              <th>Konten Soal</th>
-              <th>Action</th>
-            </tr>
+            @if ($soal->jenis_soal == "Pilihan Ganda")
+              <tr>
+                <th>NO Soal</th>
+                <th>Konten Soal</th>
+                <th>Jawaban</th>
+                <th>Jawaban Benar</th>
+                <th>Action</th>
+              </tr>
+            @else
+              <tr>
+                <th>NO Soal</th>
+                <th>Konten Soal</th>
+                <th>Action</th>
+              </tr>
+            @endif
           </thead>
 
           <tbody>
@@ -36,23 +46,39 @@
 
   @section('addscript')
   <script>
-    var table = $('#kontensoal').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: '{{ url('admin/json/kontensoal/'.$soal->id.'') }}',
-      columns: [
-    // { data: 'id', render: function (data, type, row, meta) 
-    //   { 
-    //     return meta.row + meta.settings._iDisplayStart + 1; 
-    //   }
-    // },
-    // { data : 'id', name: 'id'},
-    { data : 'no_soal', name: 'no_soal'},
-    // { data: 'konten_soal', name: 'konten_soal'},
-    { data: 'kontensoal', name: 'kontensoal'},
-    { data: 'action', name: 'action', orderable: false, searchable: false },
-    ]
-  });
+
+    if ("{{ $soal->jenis_soal }}" == "Pilihan Ganda") {
+        var table = $('#kontensoal').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: '{{ url('admin/json/kontensoal/'.$soal->id.'') }}',
+          columns: [
+          { data : 'no_soal', name: 'no_soal'},
+          { data: 'kontensoal', name: 'kontensoal'},
+          { data: 'jawaban', name: 'jawaban'},
+          { data: 'jawaban_benar', name: 'jawaban_benar'},
+          { data: 'action', name: 'action', orderable: false, searchable: false },
+          ]
+        });
+    }else{
+      var table = $('#kontensoal').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: '{{ url('admin/json/kontensoal/'.$soal->id.'') }}',
+          columns: [
+          // { data: 'id', render: function (data, type, row, meta) 
+          //   { 
+          //     return meta.row + meta.settings._iDisplayStart + 1; 
+          //   }
+          // },
+          // { data : 'id', name: 'id'},
+          { data : 'no_soal', name: 'no_soal'},
+          // { data: 'konten_soal', name: 'konten_soal'},
+          { data: 'kontensoal', name: 'kontensoal'},
+          { data: 'action', name: 'action', orderable: false, searchable: false },
+          ]
+        });
+    }
     
     // function add() {
     //   save_method = "add";
@@ -100,24 +126,24 @@
           data : {'_method' : 'DELETE', '_token' : csrf_token},
           success : function(data) {
             table.ajax.reload();
-            swal({
-              title: 'Success!',
-              text: data.message,
-              type: 'success',
-              timer: '3000'
-            })
-          },
-          error : function () {
-            swal({
-              title: 'Oops...',
-              text: data.message,
-              type: 'error',
-              timer: '3000'
-            })
-          }
-        });
-      });
-    }
+              swal({
+                title: 'Success!',
+                text: data.message,
+                type: 'success',
+                timer: '3000'
+              })
+            },
+            error : function () {
+              swal({
+                title: 'Oops...',
+                text: data.message,
+                type: 'error',
+                timer: '3000'
+              })
+            }
+          });
+          });
+      }
 
     // $(function(){
     //   $('#modal-form form').validator().on('submit', function (e) {

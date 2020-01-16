@@ -57,6 +57,7 @@
       $('#modal-form').modal('show');
       $('#modal-form form')[0].reset();
       $('.modal-title').text('Tambah Soal');
+      // $('#jenis_soal').prop('disabled', false);
     }
 
     function edit(id) {
@@ -75,6 +76,8 @@
           $('#kategori_soal_id option[value="'+data.soal.kategori_soal_id+'"]').prop('selected', true);
           // $('#konten_soal').val(data.konten_soal);
           $('#jenis_soal option[value="'+data.soal.jenis_soal+'"').prop('selected', true);
+          // $('#jenis_soal').prop('disabled', true);
+          // $('#jenissoal').val(data.soal.jenis_soal);
           $('#tag_materi').val(data.soal.tag_materi);
           $('#jumlah_soal').val(data.jumlahsoal);
         },

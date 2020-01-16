@@ -16,6 +16,7 @@ class CreateRefJawabanSoalTable extends Migration
         Schema::create('ref_jawaban_soal', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('soal_id');
+            $table->integer('konten_soal_id');
             $table->integer('no_soal');
             $table->text('jawaban');
             $table->text('jawaban_benar');
