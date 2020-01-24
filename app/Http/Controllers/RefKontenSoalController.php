@@ -6,6 +6,7 @@ use App\ref_konten_soal;
 use App\ref_jawaban_soal;
 use App\m_Soal;
 use DataTables;
+use Auth;
 use Illuminate\Http\Request;
 
 class RefKontenSoalController extends Controller
@@ -59,10 +60,18 @@ class RefKontenSoalController extends Controller
 
     public function index($id)
     {
-        $data['title'] = "iCourse | KONTEN SOAL";
-        $data['soal'] = m_Soal::find($id);
-        $data['pagecontent'] = "admin.soal.konten_soal";
-        return view('layouts.app',$data);
+        if (Auth::check() && Auth::user()->level == "admin") {
+            $data['title'] = "iCourse | KONTEN SOAL";
+            $data['soal'] = m_Soal::find($id);
+            $data['pagecontent'] = "admin.soal.konten_soal";
+            return view('layouts.app',$data);
+
+        }elseif (Auth::check() && Auth::user()->level == "guru") {
+            $data['title'] = "iCourse | KONTEN SOAL";
+            $data['soal'] = m_Soal::find($id);
+            $data['pagecontent'] = "guru.soal.konten_soal";
+            return view('layouts.app',$data);
+        }
     }
 
     /**
@@ -72,12 +81,21 @@ class RefKontenSoalController extends Controller
      */
     public function create($id)
     {
-        $data['title'] = "iCourse | BUAT SOAL";
-        $data['soal'] = m_Soal::find($id);
-        $soal = m_Soal::find($id);
-        $data['jumlahsoal'] = ref_konten_soal::where('soal_id', $soal->id)->count();
-        $data['pagecontent'] = "admin.soal.buat_soal";
-        return view('layouts.app',$data);
+        if (Auth::check() && Auth::user()->level == "admin") {
+            $data['title'] = "iCourse | BUAT SOAL";
+            $data['soal'] = m_Soal::find($id);
+            $soal = m_Soal::find($id);
+            $data['jumlahsoal'] = ref_konten_soal::where('soal_id', $soal->id)->count();
+            $data['pagecontent'] = "admin.soal.buat_soal";
+            return view('layouts.app',$data);
+        }elseif (Auth::check() && Auth::user()->level == "guru") {
+            $data['title'] = "iCourse | BUAT SOAL";
+            $data['soal'] = m_Soal::find($id);
+            $soal = m_Soal::find($id);
+            $data['jumlahsoal'] = ref_konten_soal::where('soal_id', $soal->id)->count();
+            $data['pagecontent'] = "guru.soal.buat_soal";
+            return view('layouts.app',$data);
+        }
     }
 
     /**
@@ -104,7 +122,11 @@ class RefKontenSoalController extends Controller
             return $this->storejawaban($soal_id,$no_soal,$jawaban,$jawaban_benar);
 
         }else {
-            return redirect('admin/soal/konten_soal/'.$request->soal_id.'');
+            if (Auth::check() && Auth::user()->level == "admin") {
+                return redirect('admin/soal/konten_soal/'.$request->soal_id.'');
+            }elseif (Auth::check() && Auth::user()->level == "guru") {
+                return redirect('guru/soal/konten_soal/'.$request->soal_id.'');
+            }
         }
     }
 
@@ -119,8 +141,12 @@ class RefKontenSoalController extends Controller
             'jawaban' => implode('{{-- Batas JAWABAN --}}', $jawaban),
             'jawaban_benar' => $jawaban_benar,
         ]);
-
-        return redirect('admin/soal/konten_soal/'.$soal_id.'');
+        
+        if (Auth::check() && Auth::user()->level == "admin") {
+            return redirect('admin/soal/konten_soal/'.$soal_id.'');
+        }elseif (Auth::check() && Auth::user()->level == "guru") {
+            return redirect('guru/soal/konten_soal/'.$soal_id.'');
+        }
     }
 
 
@@ -165,25 +191,35 @@ class RefKontenSoalController extends Controller
     public function edit($soal_id, $id)
     {
 
-        $data['kontensoal'] = ref_konten_soal::where('id' ,$id)->where('soal_id', $soal_id)->first();
-        $data['soal'] = m_Soal::find($soal_id);
+        if (Auth::check() && Auth::user()->level == "admin") {
+            $data['kontensoal'] = ref_konten_soal::where('id' ,$id)->where('soal_id', $soal_id)->first();
+            $data['soal'] = m_Soal::find($soal_id);
+            $soal = m_Soal::find($soal_id);
+            if ($soal->jenis_soal == "Pilihan Ganda") {
+                $data['jawaban'] = ref_jawaban_soal::where('soal_id',$soal_id)->where('konten_soal_id', $id)->first();
+                $jawaban = ref_jawaban_soal::where('soal_id',$soal_id)->where('konten_soal_id', $id)->first();
 
+                $data['jawab'] = explode('{{-- Batas JAWABAN --}}', $jawaban->jawaban);
+            }
+            $data['title'] = "iCourse | EDIT SOAL";
+            $data['pagecontent'] = "admin.soal.edit_soal";
+            return view('layouts.app',$data);
 
-        $soal = m_Soal::find($soal_id);
-        if ($soal->jenis_soal == "Pilihan Ganda") {
+        }elseif (Auth::check() && Auth::user()->level == "guru") {
+            $data['kontensoal'] = ref_konten_soal::where('id' ,$id)->where('soal_id', $soal_id)->first();
+            $data['soal'] = m_Soal::find($soal_id);
+            $soal = m_Soal::find($soal_id);
+            if ($soal->jenis_soal == "Pilihan Ganda") {
+                $data['jawaban'] = ref_jawaban_soal::where('soal_id',$soal_id)->where('konten_soal_id', $id)->first();
 
-            $data['jawaban'] = ref_jawaban_soal::where('soal_id',$soal_id)->where('konten_soal_id', $id)->first();
-            $jawaban = ref_jawaban_soal::where('soal_id',$soal_id)->where('konten_soal_id', $id)->first();
+                $jawaban = ref_jawaban_soal::where('soal_id',$soal_id)->where('konten_soal_id', $id)->first();
 
-            $data['jawab'] = explode('{{-- Batas JAWABAN --}}', $jawaban->jawaban);
-
+                $data['jawab'] = explode('{{-- Batas JAWABAN --}}', $jawaban->jawaban);
+            }
+            $data['title'] = "iCourse | EDIT SOAL";
+            $data['pagecontent'] = "guru.soal.edit_soal";
+            return view('layouts.app',$data);
         }
-
-        $data['title'] = "iCourse | EDIT SOAL";
-        $data['pagecontent'] = "admin.soal.edit_soal";
-
-        return view('layouts.app',$data);
-
     }
 
     /**
@@ -211,7 +247,11 @@ class RefKontenSoalController extends Controller
         if ($request->jenissoal == "Pilihan Ganda") {
             return $this->updatejawaban($soal_id,$konten_soal_id,$no_soal,$jawaban,$jawaban_benar);
         }else{
-            return redirect('admin/soal/konten_soal/'.$kontensoal->soal_id.'');
+            if (Auth::check() && Auth::user()->level == "admin") {
+                return redirect('admin/soal/konten_soal/'.$kontensoal->soal_id.'');
+            }elseif (Auth::check() && Auth::user()->level == "guru") {
+                return redirect('guru/soal/konten_soal/'.$kontensoal->soal_id.'');
+            }
         }
     }
 
@@ -227,7 +267,12 @@ class RefKontenSoalController extends Controller
 
         $jawabansoal->save();
 
-        return redirect('admin/soal/konten_soal/'.$soal_id.'');
+        if (Auth::check() && Auth::user()->level == "admin") {
+            return redirect('admin/soal/konten_soal/'.$soal_id.'');
+        }elseif (Auth::check() && Auth::user()->level == "guru") {
+            return redirect('guru/soal/konten_soal/'.$soal_id.'');
+        }
+
     }
 
     /**
@@ -240,14 +285,7 @@ class RefKontenSoalController extends Controller
     {
         ref_konten_soal::destroy($id);
 
-        return response()->json([
-            "success" => true
-        ]); 
-    }
-
-    public function destroyjawaban($id)
-    {
-        ref_jawaban_soal::destroy($id);
+        ref_jawaban_soal::where('konten_soal_id',$id)->delete();
 
         return response()->json([
             "success" => true

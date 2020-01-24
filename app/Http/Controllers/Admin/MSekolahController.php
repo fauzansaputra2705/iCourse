@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\m_Sekolah;
 use App\m_Provinsi;
+use App\User;
 use DataTables;
 use DB;
 use Illuminate\Http\Request;
@@ -96,6 +97,15 @@ class MSekolahController extends Controller
     public function store(Request $request)
     {
         m_Sekolah::create($request->all());
+
+        $email = str_replace(" ", "_", strtolower($request->nama_sekolah));
+        User::create([
+            'name' => $request->nama_sekolah,
+            'email' => $email."@gmail.com",
+            'no_akun' => 0,
+            'password' => bcrypt('sekolah@123'),
+            'level' => 'sekolah',
+        ]);
         
         return redirect('admin/sekolah');
     }

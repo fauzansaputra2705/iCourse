@@ -14,6 +14,7 @@
     <script src="{{ asset('assets/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/validator/validator.min.js') }}"></script>
     <script src="{{ asset('assets/select2/select2.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/mdb.js') }}"></script> --}}
 
 
     <!-- Footer Scripts

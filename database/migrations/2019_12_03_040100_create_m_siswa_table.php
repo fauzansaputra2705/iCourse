@@ -17,8 +17,8 @@ class CreateMSiswaTable extends Migration
             $table->bigIncrements('id');
             $table->string('nik');
             $table->string('nama_lengkap');
-            $table->enum('jenis_kelamin',['L','P']);
-            $table->date('tanggal_ lahir');
+            $table->enum('jenis_kelamin',['Laki-laki','Perempuan']);
+            $table->date('tanggal_lahir');
             $table->text('alamat');
             $table->integer('kelurahan_id');
             $table->integer('kecamatan_id');

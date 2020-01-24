@@ -2,7 +2,7 @@
 
 	<div class="content-wrap">
     <div class="container">
-      <h1>Tambah Sekolah</h1>
+      <h1>{{ empty($sekolah) ? "Tambah Sekolah" : "Edit Sekolah" }}</h1>
       <hr color="black" style="height: 2px;">
     </div>
 

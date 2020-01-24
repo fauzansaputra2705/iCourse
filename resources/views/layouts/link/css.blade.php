@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="{{ asset('assets/ckeditor/skins/moono-lisa/editor.css') }}" type="text/css" />
 
     <link rel="stylesheet" href="{{ asset('assets/css/icheck-bootstrap.css') }}" type="text/css"/>
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/checkbox.css') }}" type="text/css"/> --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/magic-check.css') }}" type="text/css"/>
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/mdb.css') }}" type="text/css"/> --}}
 
     <!-- Hosting Demo Specific Stylesheet -->
     <link rel="stylesheet" href="{{ asset('assets/demos/course/course.css') }}" type="text/css" />

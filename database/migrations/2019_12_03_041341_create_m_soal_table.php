@@ -18,6 +18,7 @@ class CreateMSoalTable extends Migration
             $table->integer('kategori_soal_id');
             $table->string('jenis_soal');
             $table->string('tag_materi');
+            $table->integer('guru_id');
             // $table->integer('jumlah_soal');
             $table->timestamps();
 

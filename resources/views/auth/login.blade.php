@@ -356,7 +356,7 @@
 
                         <!-- Top Cart
                             ============================================= -->
-                            <div id="top-cart">
+                            {{-- <div id="top-cart">
                                 <a href="#" id="top-cart-trigger"><i class="icon-shopping-cart"></i><span>5</span></a>
                                 <div class="top-cart-content">
                                     <div class="top-cart-title">
@@ -389,7 +389,7 @@
                                         <a href="#" class="button button-rounded button-small nomargin fright">View Cart</a>
                                     </div>
                                 </div>
-                            </div><!-- #top-cart end -->
+                            </div> --}}<!-- #top-cart end -->
 
                         <!-- Top Search
                             ============================================= -->

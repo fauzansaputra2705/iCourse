@@ -11,7 +11,7 @@
       <div class="container">
         <a onclick="add()" class="btn btn-primary text-white mb-3"><i class="fas fa-plus text-white"></i> Tambah </a>
 
-        <table id="soal" class="table table-striped table-bordered" style="width:100%">
+        <table id="adminsoal" class="table table-striped table-bordered" style="width:100%">
           <thead>
             <tr>
               <th>ID</th>
@@ -19,6 +19,7 @@
               <th>Jenis Soal</th>
               <th>TAG Materi</th>
               <th>Jumlah Soal</th>
+              <th>Pembuat</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -37,10 +38,10 @@
 
   @section('addscript')
   <script>    
-    var table = $('#soal').DataTable({
+    var table = $('#adminsoal').DataTable({
       processing: true,
       serverSide: true,
-      ajax: '{{ route('json_soal') }}',
+      ajax: '{{ route('json_soal_admin') }}',
       columns: [
       { data: 'id', name: 'id' },
       { data: 'kategori_soal', name: 'kategori_soal' },
@@ -48,6 +49,7 @@
       { data: 'tag_materi', name: 'tag_materi' },
       // { data: 'jumlah_soal', name: 'jumlah_soal' },
       { data: 'jumlahsoal', name: 'jumlahsoal' },
+      { data: 'pembuat', name: 'pembuat' },
       { data: 'action', name: 'action', orderable: false, searchable: false }
       ]
     });

@@ -11,13 +11,14 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="{{ route('kategori_soal.index') }}">Kategori Soal</a>
+        <a class="dropdown-item" href="{{ route('kategori_quiz.index') }}">Kategori Quiz</a>
     </div>
 </li>
 <li class="nav-item">
     <a href="" class="nav-link">Bank Soal</a>
 </li>
 <li class="nav-item">
-    <a href="{{ route('soal.index') }}" class="nav-link">Soal</a>
+    <a href="{{ url('admin/soal') }}" class="nav-link">Soal</a>
 </li>
 {{-- <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,14 +31,6 @@
 </li> --}}
 <li class="nav-item">
     <a href="#" class="nav-link">Materi</a>
-</li>
-<li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Quiz
-    </a>
-    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="">Kategori Quiz</a>
-    </div>
 </li>
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -109,16 +102,22 @@
 <li class="nav-item active">
     <a class="nav-link" href="{{ url('guru') }}">Home</a>
 </li>
-<li class="nav-item dropdown">
+<!-- <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Soal
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="#">Buat Soal</a>
-        <a class="dropdown-item" href="#">Bank Soal</a>
+        {{-- <a class="dropdown-item" href="#">Bank Soal</a> --}}
         {{-- <div class="dropdown-divider"></div> --}}
         {{-- <a class="dropdown-item" href="#">Another Dropdown Item</a> --}}
     </div>
+</li> -->
+<li class="nav-item">
+    <a href="{{ url('guru/soal') }}" class="nav-link">Soal</a>
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link">Bank Soal</a>
 </li>
 <li class="nav-item">
     <a href="#" class="nav-link">Quiz</a>
@@ -153,10 +152,10 @@
     <a class="nav-link" href="{{ url('sekolah') }}">Home</a>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link">Guru</a>
+    <a href="{{ url('sekolah/guru') }}" class="nav-link">Guru</a>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link">Sekolah</a>
+    <a href="{{ url('sekolah/siswa') }}" class="nav-link">Siswa</a>
 </li>
 <li class="nav-item dropdown">
     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

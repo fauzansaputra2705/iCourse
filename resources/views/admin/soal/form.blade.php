@@ -39,6 +39,8 @@
 						<input type="text" name="tag_materi" id="tag_materi" value="" placeholder="" class="form-control">
 					</div>
 
+					<input type="hidden" name="guru_id" value="0">
+
 					{{-- <div class="form-group">
 						<label for="">Jumlah Soal</label>
 						<input type="number" readonly name="jumlah_soal" id="jumlah_soal" value="" placeholder="" class="form-control">

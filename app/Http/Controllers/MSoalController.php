@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\m_Soal;
+use App\m_Guru;
 use App\m_Kategori_Soal;
 use App\ref_konten_soal;
 use App\ref_jawaban_soal;
 use Session;
 use DataTables;
+use Auth;
 use DB;
 use Illuminate\Http\Request;
 
@@ -20,7 +22,7 @@ class MSoalController extends Controller
      */
 
 
-    public function json()
+    public function jsonadmin()
     {
         $soal = DB::table('m_soal')
         ->join('m_kategori_soal', 'm_kategori_soal.id', '=', 'm_soal.kategori_soal_id')
@@ -34,12 +36,62 @@ class MSoalController extends Controller
             return $jumlahsoal;
         })
 
+        ->addColumn('pembuat', function($soal){
+            if ($soal->guru_id == 0) {
+                return "Admin";
+            }else{
+                $guru_id = m_Guru::where('id', $soal->guru_id)->first('nama_lengkap');
+                    return $guru_id->nama_lengkap;
+            }
+        })
+
+        ->addColumn('action', function($soal){
+            if (!$soal->guru_id == 0) {
+                return ' <a href="'. url('admin/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-white">View Soal</a>';
+            }else{
+                return
+                ' <a onclick="edit('. $soal->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
+                .' <a onclick="hapus('. $soal->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> '
+                .' <a href="'. url('admin/soal/konten_soal/'.$soal->id.'') .'" class="btn btn-primary btn-xs text-white">Buat/Edit Soal</a> '
+                /*.' <a href="'. url('admin/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-white">View Soal</a> '*/;
+            }
+        })
+        ->rawColumns(['action','jumlahsoal','pembuat'])
+        ->make(true);
+    }
+
+
+
+    public function jsonguru($guru_id)
+    {
+        $soal = DB::table('m_soal')
+        ->join('m_kategori_soal', 'm_kategori_soal.id', '=', 'm_soal.kategori_soal_id')
+        ->select('m_soal.*', 'm_kategori_soal.kategori_soal')
+        ->where('guru_id',$guru_id)
+        ->get();
+
+        return DataTables::of($soal)
+
+        ->addColumn('jumlahsoal', function($soal){
+            $jumlahsoal = ref_konten_soal::where('soal_id', $soal->id)->count();
+            return $jumlahsoal;
+        })
+
+        // ->addColumn('pembuat', function($soal){
+        //     if ($soal->guru_id == 0) {
+        //         return "Admin";
+        //     }else{
+        //         $guru_id = m_Guru::where('id', $soal->guru_id)->first('nama_lengkap');
+        //             return $guru_id->nama_lengkap;
+        //     }
+        // })
+
         ->addColumn('action', function($soal){
             return  
             ' <a onclick="edit('. $soal->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
             .' <a onclick="hapus('. $soal->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> '
-            .' <a href="'. url('admin/soal/konten_soal/'.$soal->id.'') .'" class="btn btn-primary btn-xs text-white">Buat/Edit Soal</a> '
-            .' <a href="'. url('admin/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-white">View Soal</a> ';
+            .' <a href="'. url('guru/soal/konten_soal/'.$soal->id.'') .'" class="btn btn-primary btn-xs text-white">Buat/Edit Soal</a> '
+            .' <a href="'. url('guru/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-white">View Soal</a> ';
         })
         ->rawColumns(['action','jumlahsoal'])
         ->make(true);
@@ -49,11 +101,19 @@ class MSoalController extends Controller
 
     public function index()
     {
-        $data['title'] = "iCourse | SOAL";
-        $data['pagecontent'] = "admin.soal.data_soal";
-        $data['kategorisoal'] = m_Kategori_Soal::all();
+        if (Auth::check() && Auth::user()->level == "admin") {
+            $data['title'] = "iCourse | SOAL";
+            $data['pagecontent'] = "admin.soal.data_soal";
+            $data['kategorisoal'] = m_Kategori_Soal::all();
+            return view('layouts.app',$data);
 
-        return view('layouts.app',$data);
+        }elseif (Auth::check() && Auth::user()->level == "guru") {
+            $data['title'] = "iCourse | SOAL";
+            $data['pagecontent'] = "guru.soal.data_soal";
+            $data['kategorisoal'] = m_Kategori_Soal::all();
+            $data['guru_id'] = DB::table('m_guru')->where('nama_lengkap', Auth::user()->name)->first('id'); 
+            return view('layouts.app',$data);
+        }
     }
 
     /**
@@ -78,6 +138,7 @@ class MSoalController extends Controller
             'kategori_soal_id' => $request->kategori_soal_id,
             'jenis_soal' => $request->jenis_soal,
             'tag_materi' => $request->tag_materi,
+            'guru_id' => $request->guru_id,
             // 'jumlah_soal' => 0,
         ];
 
