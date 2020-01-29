@@ -19,6 +19,22 @@ class GuruController extends Controller
         return view('layouts.app',$data);
     }
 
+    public function nilai()
+    {
+        $data['title'] = "iCourse | NILAI";
+        $data['pagecontent'] = "guru.nilai";
+        return view('layouts.app',$data);
+    }
+
+
+    // public function quiz()
+    // {
+    //     $data['title'] = "iCourse | QUIZ";
+    //     $data['pagecontent'] = "guru.quiz";
+    //     return view('layouts.app',$data);
+    // }
+
+
     /**
      * Show the form for creating a new resource.
      *

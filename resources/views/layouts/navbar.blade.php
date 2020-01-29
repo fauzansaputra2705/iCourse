@@ -71,7 +71,7 @@
     <a class="nav-link" href="{{ url('siswa') }}">Home</a>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link">Quiz</a>
+    <a href="{{ url('siswa/quiz') }}" class="nav-link">Quiz</a>
 </li>
 <li class="nav-item">
     <a href="#" class="nav-link">Nilai</a>
@@ -120,10 +120,10 @@
     <a href="#" class="nav-link">Bank Soal</a>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link">Quiz</a>
+    <a href="" class="nav-link">Quiz</a>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link">Nilai</a>
+    <a href="{{ url('guru/nilai') }}" class="nav-link">Nilai</a>
 </li>
 <li class="nav-item dropdown">
     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

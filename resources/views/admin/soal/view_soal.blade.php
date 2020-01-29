@@ -1,8 +1,4 @@
-<style>
-	label {
 
-}
-</style>
 <section id="content" style="overflow: visible;">
 
 	<div class="content-wrap container">
@@ -26,7 +22,7 @@
 
 										@for ($i = 0; $i < 4; $i++)
 											{{-- <input type="radio" value="" id="{{ $jb->no_soal.$i }}" class="magic-radio" name="jawaban{{ $jb->no_soal }}" disabled @if ($jb->jawaban_benar == $jawab[$i]) checked @endif> --}}
-											<input type="radio" value="" id="{{ $jb->no_soal.$i }}" name="jawaban{{ $jb->no_soal }}" disabled @if ($jb->jawaban_benar == $jawab[$i]) checked @endif>
+											<input type="radio" value=""  id="{{ $jb->no_soal.$i }}" name="jawaban{{ $jb->no_soal }}" disabled @if ($jb->jawaban_benar == $jawab[$i]) checked @endif>
 
 											@if ($jb->jawaban_benar == $jawab[$i])
 												<label for="{{ $jb->no_soal.$i }}">
@@ -44,6 +40,7 @@
 									@endif
 								@endforeach
 							@endif
+						</p>
 							{{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
 						</div>
 					</div>

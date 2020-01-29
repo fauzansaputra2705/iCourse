@@ -1,7 +1,7 @@
 <!-- External JavaScripts
 	============================================= -->
 	
-	<script src="{{ asset('assets/js/jquery.js') }}"></script>
+	{{-- <script src="{{ asset('assets/js/jquery.js') }}"></script> --}}
 
     <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap4.js') }}"></script>

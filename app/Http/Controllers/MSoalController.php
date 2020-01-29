@@ -53,7 +53,7 @@ class MSoalController extends Controller
                 ' <a onclick="edit('. $soal->id .')" class="btn btn-primary btn-xs text-white"><i class="fas fa-edit text-white"></i></a> '
                 .' <a onclick="hapus('. $soal->id .')" class="btn btn-danger btn-xs text-white"><i class="fas fa-trash-alt text-white"></i></a> '
                 .' <a href="'. url('admin/soal/konten_soal/'.$soal->id.'') .'" class="btn btn-primary btn-xs text-white">Buat/Edit Soal</a> '
-                /*.' <a href="'. url('admin/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-white">View Soal</a> '*/;
+                .' <a href="'. url('admin/soal/'.$soal->id.'') .'" class="btn btn-success btn-xs text-white">View Soal</a> ';
             }
         })
         ->rawColumns(['action','jumlahsoal','pembuat'])

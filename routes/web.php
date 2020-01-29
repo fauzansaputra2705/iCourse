@@ -100,7 +100,17 @@ Route::group(['prefix' => 'guru', 'middleware' => 'guru'], function () {
 	Route::patch('/soal/konten_soal/{soal_id}/{id}', 'RefKontenSoalController@update');
 	Route::delete('/soal/konten_soal/{id}', 'RefKontenSoalController@destroy');
 	Route::post('soal/upload', 'RefKontenSoalController@upload')->name('ckeditor.upload');
+	//nilai
+	Route::get('/nilai', 'Guru\GuruController@nilai');
+	//quiz
+	// Route::get('/quiz', 'Guru\GuruController@quiz');
 
 });
 
-Route::get('/siswa', 'Siswa\SiswaController@index')->name('siswa')->middleware('siswa');
+
+//siswa
+Route::group(['prefix' => 'siswa', 'middleware' => 'siswa'], function() {
+	Route::get('/', 'Siswa\SiswaController@index')->name('siswa');
+	Route::get('/quiz', 'Siswa\SiswaController@quiz');
+	Route::get('/startquiz/{id}', 'Siswa\SiswaController@startquiz');
+});
