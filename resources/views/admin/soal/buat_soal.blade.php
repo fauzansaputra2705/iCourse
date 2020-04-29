@@ -104,11 +104,14 @@
 
 @section('addscript')
 <script>
+  
 
   CKEDITOR.replace('konten_soal', {
+        language: 'en',
         filebrowserUploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token() ])}}",
-        filebrowserUploadMethod: 'form'
+        filebrowserUploadMethod: 'form',
     });
+  CKEDITOR.config.allowedContent = true;
 
 
   $('#jawaban_benara').on('change', function() {

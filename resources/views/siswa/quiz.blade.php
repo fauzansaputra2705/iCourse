@@ -86,14 +86,18 @@
               <span aria-hidden="true">&times;</span>
           </button>
       </div>
+    <form action="{{ route('start') }}" method="post">
       <div class="modal-body">
-        
+        @csrf
+        <input type="hidden" name="soal_id" value="{{ $soal->id }}">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cumque minima eligendi sed sapiente? Consequatur corporis mollitia tenetur, porro delectus voluptates magnam eius aperiam. Deserunt vel doloribus quis eligendi reiciendis.</p>
     </div>
     <div class="modal-footer">
-        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
-        <a href="{{ url('siswa/startquiz/'.$soal->id.'') }}" class="btn btn-primary">Start test</a>
+        <button type="submit" class="btn btn-primary">Start Test</button>
+        {{-- <a href="{{ url('siswa/startquiz/'.$soal->id.'/1') }}" class="btn btn-primary">Start test</a> --}}
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     </div>
+    </form>
 </div>
 </div>
 </div>

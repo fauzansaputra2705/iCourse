@@ -18,6 +18,9 @@ Route::get('/', function () {
 	return view('layouts.app' , $data);
 });
 
+//upload gambar ckeditor
+Route::post('soal/upload', 'RefKontenSoalController@upload')->name('ckeditor.upload');
+
 Auth::routes();
 
 //admin
@@ -58,7 +61,8 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'admin'], function() {
 	Route::get('/soal/konten_soal/{soal_id}/{id}/edit', 'RefKontenSoalController@edit');
 	Route::patch('/soal/konten_soal/{soal_id}/{id}', 'RefKontenSoalController@update');
 	Route::delete('/soal/konten_soal/{id}', 'RefKontenSoalController@destroy');
-	Route::post('soal/upload', 'RefKontenSoalController@upload')->name('ckeditor.upload');
+	// Route::post('soal/upload', 'RefKontenSoalController@upload')->name('ckeditor.upload');
+
 	//kategori quiz
 	Route::resource('/kategori_quiz', 'Admin\MKategoriQuizController');
 	Route::get('/json/kategori_quiz', 'Admin\MKategoriQuizController@json')->name('json_kategoriquiz');
@@ -99,7 +103,7 @@ Route::group(['prefix' => 'guru', 'middleware' => 'guru'], function () {
 	Route::get('/soal/konten_soal/{soal_id}/{id}/edit', 'RefKontenSoalController@edit');
 	Route::patch('/soal/konten_soal/{soal_id}/{id}', 'RefKontenSoalController@update');
 	Route::delete('/soal/konten_soal/{id}', 'RefKontenSoalController@destroy');
-	Route::post('soal/upload', 'RefKontenSoalController@upload')->name('ckeditor.upload');
+	// Route::post('/soal/upload', 'RefKontenSoalController@upload')->name('ckeditor_upload');
 	//nilai
 	Route::get('/nilai', 'Guru\GuruController@nilai');
 	//quiz
@@ -112,5 +116,14 @@ Route::group(['prefix' => 'guru', 'middleware' => 'guru'], function () {
 Route::group(['prefix' => 'siswa', 'middleware' => 'siswa'], function() {
 	Route::get('/', 'Siswa\SiswaController@index')->name('siswa');
 	Route::get('/quiz', 'Siswa\SiswaController@quiz');
-	Route::get('/startquiz/{id}', 'Siswa\SiswaController@startquiz');
+	
+	Route::post('/start', 'Siswa\SiswaController@start')->name('start');
+	Route::get('/getallquiz/{id}/{no_soal}', 'Siswa\SiswaController@getallquiz')->name('getallquiz');
+	Route::get('/raguragu', 'Siswa\SiswaController@ragu')->name('ragu');
+
+	Route::get('/startquiz/{id}/{no_soal}', 'Siswa\SiswaController@startquiz');
+	Route::post('/savequiz', 'Siswa\SiswaController@savequiz')->name('savequiz');
+	Route::patch('/updatequiz/{id}', 'Siswa\SiswaController@updatequiz');
+	Route::get('/getquiz/{id}/{no_soal}', 'Siswa\SiswaController@getquiz')->name('getquiz');
+	Route::get('/finish', 'Siswa\SiswaController@periksaquiz')->name('finish');
 });

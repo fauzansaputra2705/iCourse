@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('assets/select2/select2.min.css') }}" type="text/css" />
 
     <link rel="stylesheet" href="{{ asset('assets/ckeditor/skins/moono-lisa/editor.css') }}" type="text/css" />
+    <link href="{{ asset('assets/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('assets/css/icheck-bootstrap.css') }}" type="text/css"/>
     <link rel="stylesheet" href="{{ asset('assets/css/magic-check.css') }}" type="text/css"/>

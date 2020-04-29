@@ -158,11 +158,17 @@ class RefKontenSoalController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
             $fileName = $fileName.'_'.time().'.'.$extension;
         
-            $request->file('upload')->move(public_path('images'), $fileName);
+            if ($extension == "jpg" || $extension == "jpeg" || $extension == "png") {
+                $request->file('upload')->move(public_path('images'), $fileName);
+                $url = asset('images/'.$fileName);
+                $msg = 'Upload Gambar Sukses'; 
+            }elseif ($extension == "mp3") {
+                $request->file('upload')->move(public_path('audio'), $fileName);
+                $url = asset('audio/'.$fileName); 
+                $msg = 'Upload Audio Sukses'; 
+            }
    
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('images/'.$fileName); 
-            $msg = 'Upload Gambar Sukses'; 
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
                
             @header('Content-type: text/html; charset=utf-8'); 

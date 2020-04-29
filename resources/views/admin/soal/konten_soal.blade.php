@@ -11,7 +11,7 @@
       <div class="container">
         <a href="{{ url('admin/soal/konten_soal/'.$soal->id.'/create/') }}" class="btn btn-primary text-white mb-3"><i class="fas fa-plus text-white"></i> Tambah </a>
 
-        <a href="{{ route('soal.index') }}" class="btn btn-danger float-lg-right mb-3">Kembali</a>
+        <a href="{{ url('admin/soal') }}" class="btn btn-danger float-lg-right mb-3">Kembali</a>
 
         <table id="kontensoal" class="table table-striped table-bordered" style="width:100%">
           <thead>

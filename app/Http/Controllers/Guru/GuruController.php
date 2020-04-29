@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Guru;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\m_Kategori_Soal;
+
 class GuruController extends Controller
 {
     /**
@@ -23,6 +25,7 @@ class GuruController extends Controller
     {
         $data['title'] = "iCourse | NILAI";
         $data['pagecontent'] = "guru.nilai";
+        $data['kategori_soal'] = m_Kategori_Soal::join('');
         return view('layouts.app',$data);
     }
 

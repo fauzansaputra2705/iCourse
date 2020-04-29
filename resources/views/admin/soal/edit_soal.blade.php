@@ -22,7 +22,7 @@
          <input type="hidden" name="no_soal" value="{{ $kontensoal->no_soal }}">
 
          <div class="form-group">
-           <textarea name="konten_soal" cols="30" rows="10">{!! $kontensoal->konten_soal !!}</textarea>
+           <textarea name="konten_soal" cols="30" rows="10">{{ $kontensoal->konten_soal }}</textarea>
          </div>
 
          @if ($soal->jenis_soal == "Pilihan Ganda")

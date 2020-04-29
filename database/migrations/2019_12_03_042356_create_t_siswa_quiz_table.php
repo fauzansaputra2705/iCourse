@@ -15,6 +15,13 @@ class CreateTSiswaQuizTable extends Migration
     {
         Schema::create('t_siswa_quiz', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('soal_id');
+            $table->integer('konten_soal_id');
+            $table->integer('jawaban_soal_id');
+            $table->string('ragu_ragu');
+            $table->string('jawaban_siswa');
+            $table->integer('no_soal');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

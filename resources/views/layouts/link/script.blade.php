@@ -8,6 +8,8 @@
 
     <script src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('assets/ckeditor/config.js') }}"></script>
+    <script src="{{ asset('assets/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     
     <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
 	<script src="{{ asset('assets/js/plugins.js') }}"></script>

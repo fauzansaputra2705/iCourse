@@ -10,7 +10,7 @@
 					<h5 class="card-header bgcolor dark">Soal ke {{ $ks->no_soal }}</h5>
 					<div class="card-body ">
 						<h5 class="card-title"></h5>
-						<p class="card-text">{!! $ks->konten_soal !!}</p>
+						<p class="card-text">@php echo $ks->konten_soal @endphp</p>
 
 						<p class="card-text">
 							@if ($soal->jenis_soal == "Pilihan Ganda")
@@ -26,7 +26,7 @@
 
 											@if ($jb->jawaban_benar == $jawab[$i])
 												<label for="{{ $jb->no_soal.$i }}">
-													<b><i>{{ $jawab[$i] }}</i></b>
+													{{ $jawab[$i] }}
 												</label>
 											@else
 												<label for="{{ $jb->no_soal.$i }}">
